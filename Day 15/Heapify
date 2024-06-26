@@ -1,0 +1,8 @@
+from heapq import heapify,heappush,heappop
+arr=[]
+heapify(arr)
+nums=[1,22,3444,5,77890]
+for i in nums:
+    heappush(arr,-1*i)
+while arr:
+     print(-1*heappop(arr))

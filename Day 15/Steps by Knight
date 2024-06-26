@@ -1,0 +1,38 @@
+class Solution:
+    def minStepToReachTarget(self,KnightPos, TargetPos, N):
+        # Initialize the queue with the starting position of the knight
+        Q = [[KnightPos[0], KnightPos[1], 0]]
+        
+        # Possible moves of a knight in chess
+        directions = [[-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1]]
+        
+        # Set to keep track of visited positions
+        visited = set()
+        visited.add((KnightPos[0], KnightPos[1]))
+        
+        while Q:
+            curr = Q.pop(0)
+            row, col, steps = curr[0], curr[1], curr[2]
+            
+            # If the target position is reached, return the number of steps
+            if row == TargetPos[0] and col == TargetPos[1]:
+                return steps 
+            
+            # Check all possible moves
+            for direction in directions:
+                newRow = row + direction[0]
+                newCol = col + direction[1]
+                
+                # Check if the new position is within bounds and not visited
+                if newRow > 0 and newCol > 0 and newRow <= N and newCol <= N and (newRow, newCol) not in visited:
+                    visited.add((newRow, newCol))
+                    Q.append([newRow, newCol, steps + 1])
+        
+        # If the target is not reachable
+        return -1
+
+N=6
+KnightPos = tuple([4, 5])
+TargetPos = tuple([1, 1])
+solution = Solution()
+print(solution.minStepToReachTarget(KnightPos, TargetPos, N))
