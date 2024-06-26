@@ -1,0 +1,21 @@
+def matSearch(mat, N, M, X):
+    r, c = 0, M-1
+    while r <= N-1 and c >= 0:
+        if mat[r][c] == X:
+            return 1
+        elif mat[r][c] > X:
+            c -= 1  # move left
+        else:
+            r += 1  # move down
+    return 0
+
+mat = [
+    [3, 30, 38],
+    [44, 52, 54],
+    [57, 60, 69]
+]
+N = 3
+M = 3
+X = 60
+
+print(matSearch(mat, N, M, X))  # Output should be 1
