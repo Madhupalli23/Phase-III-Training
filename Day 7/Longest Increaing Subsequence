@@ -1,0 +1,36 @@
+def lengthOfLIS(nums):
+        n=len(nums)
+        def recursiveApproach(prevInd,currInd):
+            include=0
+            if currInd==n:
+                return 0
+            elif prevInd==-1 or nums[prevInd]<nums[currInd]:
+                include = 1+ recursiveApproach(currInd,currInd+1)
+            exclude = recursiveApproach(prevInd,currInd+1)
+            return max(include,exclude)
+
+        cache=[[-1]*n for i in range(n+1)]
+        def memoizationApproach(prevInd,currInd):
+            include=0
+            if currInd==n:
+                return 0
+            elif cache[prevInd][currInd]!=-1:
+                return cache[prevInd][currInd]
+            elif prevInd==-1 or nums[prevInd]<nums[currInd]:
+                include = 1+ memoizationApproach(currInd,currInd+1)
+            exclude = memoizationApproach(prevInd,currInd+1)
+            cache[prevInd+1][currInd]=max(include,exclude)
+            return cache[prevInd+1][currInd]
+        
+        def tabulationApproach():
+            res = [1] * n 
+            finalLis = 1
+            for index in range(1, n): 
+                for prevIndex in range(index):
+                    if nums[index] > nums[prevIndex]:
+                        res[index] = max(res[index], res[prevIndex] + 1)
+                finalLis = max(finalLis, res[index])
+            return finalLis
+        return tabulationApproach()
+nums=[10,9,2,5,3,7,101,18]
+print(lengthOfLIS(nums))
