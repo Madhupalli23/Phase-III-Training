@@ -1,0 +1,13 @@
+def recursiveLS(nums,target,idx,n):
+    if idx==n:
+        return -1
+    elif nums[idx]==target:
+        return idx
+    return recursiveLS(nums,target,idx+1,n)
+nums=[8,7,6,6,5,90,1,2,21]
+target=90
+idx=recursiveLS(nums,target,0,len(nums))
+if idx==-1:
+    print(target,"not found")
+else:
+    print(target,"found at index:",idx)
